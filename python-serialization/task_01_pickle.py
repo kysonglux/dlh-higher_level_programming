@@ -3,7 +3,6 @@
 
 
 import pickle
-import os
 
 
 class CustomObject:
@@ -49,12 +48,16 @@ class CustomObject:
         print("Is Student: {}".format(self.is_student))
 
     def serialize(self, filename):
-        with open(filename, "wb") as f:
-            pickle.dump(self, f)
+        try:
+            with open(filename, "wb") as f:
+                pickle.dump(self, f)
+        except Exception:
+            return None
 
     @classmethod
     def deserialize(cls, filename):
-        if not os.path.exists(filename):
+        try:
+            with open(filename, "rb") as f:
+                return pickle.load(f)
+        except (FileNotFoundError, pickle.UnpicklingError, EOFError):
             return None
-        with open(filename, "rb") as f:
-            return pickle.load(f)
