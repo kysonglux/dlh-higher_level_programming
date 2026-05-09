@@ -15,9 +15,8 @@ def serialize_to_xml(dictionary, filename):
             child.text = str(value)
         tree = ET.ElementTree(root)
         tree.write(filename, encoding="utf-8", xml_declaration=True)
-
         return True
-    except Exceotion:
+    except Exception:
         return False
 
 
@@ -30,7 +29,6 @@ def deserialize_from_xml(filename):
         result = {}
         for child in root:
             result[child.tag] = child.text
-
         return result
 
     except Exception:
