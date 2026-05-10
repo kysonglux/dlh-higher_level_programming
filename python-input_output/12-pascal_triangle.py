@@ -7,7 +7,7 @@ def pascal_triangle(n):
     triangle = []
 
     for i in range(n):
-        if i <= 0:
+        if i == 0:
             triangle.append([1])
         else:
             prev = triangle[-1]
